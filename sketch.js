@@ -6,7 +6,8 @@ const Constraint = Matter.Constraint;
 var engine, world, ground;
 var creeper;
 var villager, obsidian;
-
+var witer,ang;
+var bala;
 
 function preload() {
   creeper = loadImage("./assets/background.gif");
@@ -28,6 +29,10 @@ function setup() {
 
  villager = Bodies.rectangle(160, 350, 160, 310, options);
  World.add(world, villager);
+ang=20;
+witer=new Golem(180,110,130,100,ang);
+
+bala = new Canhao(witer.posX, witer.posY);
  
 }
 
@@ -44,6 +49,6 @@ function draw() {
  imageMode(CENTER);
  image(obsidian,villager.position.x, villager.position.y, 160, 310);
  pop();
-  
-   
+witer.mostrar();  
+bala.mostrar();
 }
