@@ -8,7 +8,15 @@ class Canhao {
         this.imagem = loadImage("./assets/cannonball.png");
         World.add(world,this.corpo);
     }
+receba(){
+    var novoAng = witer.ang - 28;
+    novoAng *= (3.14/180);
+    var velocidade = p5.Vector.fromAngle(novoAng);
+    velocidade.mult(0.5);
 
+    Matter.Body.setStatic(this.corpo,false);
+    Matter.Body.setVelocity(this.corpo,{x:velocidade.x * (180/3.14),y:velocidade.y * (180/3.14)});
+}
     mostrar(){
         var pos = this.corpo.position;
         push();

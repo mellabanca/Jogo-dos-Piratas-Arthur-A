@@ -29,6 +29,7 @@ function setup() {
 
  villager = Bodies.rectangle(160, 350, 160, 310, options);
  World.add(world, villager);
+ angleMode(DEGREES)
 ang=20;
 witer=new Golem(180,110,130,100,ang);
 
@@ -51,4 +52,13 @@ function draw() {
  pop();
 witer.mostrar();  
 bala.mostrar();
+}
+function keyReleased(){
+  if(keyCode===DOWN_ARROW){
+    bala.receba();
+  }
+
+
+
+
 }
