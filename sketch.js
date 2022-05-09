@@ -1,3 +1,31 @@
+//Revisão sobre matrizes
+
+//Exemplos de matrizes
+//Matriz apenas com números
+var matriz1 = [1,58,8,4,6,16];
+console.log(matriz1);
+
+//Matriz com diferentes tipos de dados
+var matriz2 = ["Melissa", 67, true, "Arthur", false];
+//console.log(matriz2);
+
+//Matriz de matrizes
+var matriz3 = [matriz1, matriz2];
+//console.log(matriz3);
+
+//Acessando elementos da matriz de acordo com o índice
+//console.log(matriz1[4]);
+//console.log(matriz2[2]);
+//console.log(matriz3[1][3]);
+
+//Colocando e retirando elementos da matriz
+matriz1.push(15);
+matriz1.push(23);
+//console.log(matriz1);
+matriz1.pop();
+//console.log(matriz1);
+
+
 const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
