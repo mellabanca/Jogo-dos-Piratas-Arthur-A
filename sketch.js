@@ -36,6 +36,8 @@ var creeper;
 var villager, obsidian;
 var witer,ang;
 var bala;
+var bigmac=[];
+var piratasdocaribe;
 
 function preload() {
   creeper = loadImage("./assets/background.gif");
@@ -61,7 +63,7 @@ function setup() {
 ang=20;
 witer=new Golem(180,110,130,100,ang);
 
-bala = new Canhao(witer.posX, witer.posY);
+piratasdocaribe = new Piratasdocaribe(width-79, height-60, 170, 170, -80);
  
 }
 
@@ -78,15 +80,28 @@ function draw() {
  imageMode(CENTER);
  image(obsidian,villager.position.x, villager.position.y, 160, 310);
  pop();
-witer.mostrar();  
-bala.mostrar();
+witer.mostrar(); 
+
+Matter.Body.setVelocity(piratasdocaribe.corpo, {x:-0.9,y:0});
+
+piratasdocaribe.mostrar(); 
+for(var i=0;i<bigmac.length;i++){
+  coca(bigmac[i],i);
+}
 }
 function keyReleased(){
   if(keyCode===DOWN_ARROW){
-    bala.receba();
+    bigmac[bigmac.length-1].receba();
   }
-
-
-
-
+}
+function keyPressed(){
+if(keyCode===DOWN_ARROW){
+var bala = new Canhao(witer.posX, witer.posY);
+bigmac.push(bala)
+}
+}
+function coca(bala,i){
+  if(bala){
+    bala.mostrar();
+  }
 }

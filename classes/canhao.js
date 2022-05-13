@@ -6,6 +6,7 @@ class Canhao {
         this.r = 30;
         this.corpo = Bodies.circle(posX, posY, this.r, options);
         this.imagem = loadImage("./assets/cannonball.png");
+        this.batatafrita=[];
         World.add(world,this.corpo);
     }
 receba(){
@@ -23,5 +24,12 @@ receba(){
         imageMode(CENTER);
         image(this.imagem, pos.x, pos.y, this.r, this.r);
         pop();
+        if(this.corpo.velocity.x>0&&pos.x>10){
+            var position=[pos.x,pos.y]
+         this.batatafrita.push(position);
+        }
+        for(var i=0;i<this.batatafrita.length;i++){
+         image(this.imagem,this.batatafrita[i][0],this.batatafrita[i][1],5,5);
+        }
     }
 }
