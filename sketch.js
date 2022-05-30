@@ -38,10 +38,15 @@ var witer,ang;
 var bala;
 var bigmac=[];
 var piratasdocaribe;
+var mutiversso=[];
+var piratasAnimation = [];
+var piratasDados, piratasSpritesheet;
 
 function preload() {
   creeper = loadImage("./assets/background.gif");
   obsidian = loadImage("./assets/tower.png");
+  piratasDados = loadJSON("./assets/boat/boat.json");
+  piratasSpritesheet = loadImage("./assets/boat/boat.png");
 }
 
 function setup() {
@@ -60,10 +65,16 @@ function setup() {
  villager = Bodies.rectangle(160, 350, 160, 310, options);
  World.add(world, villager);
  angleMode(DEGREES)
-ang=20;
-witer=new Golem(180,110,130,100,ang);
+ ang=20;
+ witer=new Golem(180,110,130,100,ang);
 
-piratasdocaribe = new Piratasdocaribe(width-79, height-60, 170, 170, -80);
+var piratasFrames = piratasDados.frames;
+
+for(var i = 0; i < piratasFrames.length; i++){
+  var pos = piratasFrames[i].position;
+  var img = piratasSpritesheet.get(pos.x, pos.y, pos.w, pos.h);
+  piratasAnimation.push(img);
+}
  
 }
 
@@ -81,12 +92,11 @@ function draw() {
  image(obsidian,villager.position.x, villager.position.y, 160, 310);
  pop();
 witer.mostrar(); 
+guarana();
 
-Matter.Body.setVelocity(piratasdocaribe.corpo, {x:-0.9,y:0});
-
-piratasdocaribe.mostrar(); 
 for(var i=0;i<bigmac.length;i++){
   coca(bigmac[i],i);
+  pepsi(i);
 }
 }
 function keyReleased(){
@@ -103,5 +113,42 @@ bigmac.push(bala)
 function coca(bala,i){
   if(bala){
     bala.mostrar();
+    if(bala.corpo.position.x>=width||bala.corpo.position.y>=height-50){
+      bala.naomostrar(i);
+    }
   }
+}
+function guarana(){
+  if(mutiversso.length>0){
+  if(mutiversso[mutiversso.length-1]===undefined||mutiversso[mutiversso.length-1].corpo.position.x<width-300){
+    var positions=[-40,-60,-70,-20];
+    var position=random(positions);
+    var piratasdocaribe = new Piratasdocaribe(width, height-60, 170, 170, position, piratasAnimation);
+    mutiversso.push(piratasdocaribe)
+  }
+for(var i=0;i<mutiversso.length;i++){
+  if(mutiversso[i]){
+  Matter.Body.setVelocity(mutiversso[i].corpo, {x:-0.9,y:0});
+  mutiversso[i].mostrar(); 
+  mutiversso[i].animar();
+   }  
+}
+  }else{
+    var piratasdocaribe = new Piratasdocaribe(width, height-60, 170, 170, -60, piratasAnimation);
+    mutiversso.push(piratasdocaribe)
+
+  }
+}
+function pepsi(index){
+for(var i=0;i<mutiversso.length;i++){
+  if(bigmac[index]!==undefined&&mutiversso[i]!==undefined){
+    var avatar=Matter.SAT.collides(bigmac[index].corpo,mutiversso[i].corpo);
+    if(avatar.collided){
+mutiversso[i].naomostrar(i);
+Matter.World.remove(world,bigmac[index].corpo);
+delete bigmac[index];
+    }
+  }
+}
+
 }

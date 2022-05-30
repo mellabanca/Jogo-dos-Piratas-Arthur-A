@@ -32,4 +32,12 @@ receba(){
          image(this.imagem,this.batatafrita[i][0],this.batatafrita[i][1],5,5);
         }
     }
+    naomostrar(index){
+        Matter.Body.setVelocity(this.corpo,{x:0,y:0});
+        setTimeout(()=>{
+            Matter.World.remove(world,this.corpo);
+            delete bigmac[index];
+        },1000)
+
+    }
 }
