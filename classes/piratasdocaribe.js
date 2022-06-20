@@ -7,6 +7,7 @@ class Piratasdocaribe {
         this.imagem = loadImage("./assets/boat.png");
         this.animacao = piratasAnimation;
         this.speed = 0.05;
+        this.caiu = false;
         World.add(world,this.corpo);
     }
 
@@ -27,6 +28,11 @@ class Piratasdocaribe {
         pop();
     }
     naomostrar(index){
+    this.animacao = animando;
+    this.speed = 0.05;
+    this.lar = 300;
+    this.alt = 300;
+    this.caiu = true;
         setTimeout(()=>{
             Matter.World.remove(world,mutiversso[index].corpo);
             delete mutiversso[index];
